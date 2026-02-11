@@ -7,32 +7,30 @@ function setActiveLink(clickedLink) {
     clickedLink.classList.add("active");
 }
 
-document.getElementById("home").addEventListener("click", (e) => {
-    e.preventDefault();
-    setActiveLink(e.target);
-    pageInfo.innerHTML = `
+const pages = {
+    home: `
         <h1>EXPLORE DREAM DESTINATION</h1>
         <p>Discover new places and unforgettable experiences across the globe.</p>
         <a href="#">Book Now</a>
-    `;
-});
-
-document.getElementById("about").addEventListener("click", (e) => {
-    e.preventDefault();
-    setActiveLink(e.target);
-    pageInfo.innerHTML = `
+    `,
+    about: `
         <h1>About Us</h1>
         <p>We help travelers find destinations that match their dreams.</p>
-    `;
-});
-
-document.getElementById("contact").addEventListener("click", (e) => {
-    e.preventDefault();
-    setActiveLink(e.target);
-    pageInfo.innerHTML = `
+    `,
+    contact: `
         <h1>Contact Us</h1>
         <p>Email us at travel@example.com or call 555-1234.</p>
-    `;
+    `
+};
+
+navLinks.forEach(link => {
+    link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const id = e.currentTarget.id;
+
+        setActiveLink(e.currentTarget);
+        pageInfo.innerHTML = pages[id];
+    });
 });
 
 // Load Home by default
